@@ -12,9 +12,7 @@ export class CountriesHttpService {
 
   searchByCapital(query: string): Promise<Country[]> {
     const url = `${this.url}/capital/${query}`;
-    return firstValueFrom(this.httpClient.get<Country[]>(url)).catch(() => {
-      return [];
-    });
+    return firstValueFrom(this.httpClient.get<Country[]>(url)).catch(() => []);
   }
   searchByCountry(query: string): Promise<Country[]> {
     const url = `${this.url}/capital/${query}`;
