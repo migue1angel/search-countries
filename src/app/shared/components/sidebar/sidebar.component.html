@@ -1,0 +1,16 @@
+<h2>Países</h2>
+<hr />
+<ul class="list-group">
+  @for (item of sidebarItems; track $index) {
+
+  <li
+    [routerLink]="item.path"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="list-group-item"
+    style="cursor: pointer;"
+  >
+    {{ item.label }}
+  </li>
+  }
+</ul>
