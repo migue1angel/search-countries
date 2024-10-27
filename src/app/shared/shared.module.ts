@@ -4,13 +4,17 @@ import { RouterModule } from '@angular/router';
 
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { SafePipe } from './pipes/safe-url.pipe';
 
 
 
 @NgModule({
   declarations: [
     SidebarComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    LoadingComponent,
+    SafePipe
   ],
   imports: [
     CommonModule,
@@ -18,7 +22,9 @@ import { SearchBoxComponent } from './components/search-box/search-box.component
   ],
   exports: [
     SidebarComponent,
-    SearchBoxComponent
+    SearchBoxComponent,
+    LoadingComponent,
+    SafePipe
   ]
 })
 export class SharedModule { }

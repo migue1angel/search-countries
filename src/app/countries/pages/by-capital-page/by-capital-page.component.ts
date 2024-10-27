@@ -7,15 +7,18 @@ import { Country } from '../../interfaces/country.interface';
   templateUrl: './by-capital-page.component.html',
 })
 export class ByCapitalPageComponent {
-  protected countries: Country[] = [];
   private countriesHttpService = inject(CountriesHttpService);
+
+  protected countries: Country[] = [];
+  protected isLoading: boolean = false;
+
   constructor() {}
 
-  async searchByCapital(query: string) {
-    this.countries = await this.countriesHttpService.searchByCapital(query);
-    // try {
-    // } catch (error) {
-    //   this.countries = [];
-    // }
+  searchByCapital(query: string) {
+    this.isLoading = true;
+    this.countriesHttpService.searchByCapital(query).subscribe((countries) => {
+      this.countries = countries;
+      this.isLoading = false;
+    });
   }
 }

@@ -1,1 +1,21 @@
-<p>by-country-page works!</p>
+<h2>Búsqueda por país</h2>
+<hr />
+
+<div class="row">
+  <div class="col">
+    <shared-search-box
+      placeHolder="Buscar por capital"
+      (inputValue)="searchByCountry($event)"
+    ></shared-search-box>
+  </div>
+</div>
+<hr />
+
+<div class="row">
+  <div class="col">
+    @if (isLoading) {
+        <shared-loading></shared-loading>
+      }
+    <countries-country-table [countries]="countries"></countries-country-table>
+  </div>
+</div>

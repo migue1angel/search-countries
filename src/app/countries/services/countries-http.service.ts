@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, firstValueFrom, of } from 'rxjs';
+import { catchError, firstValueFrom, map, Observable, of } from 'rxjs';
 import { Country } from '../interfaces/country.interface';
 
 @Injectable({
@@ -10,16 +10,35 @@ export class CountriesHttpService {
   private url: string = 'https://restcountries.com/v3.1';
   constructor(private httpClient: HttpClient) {}
 
-  searchByCapital(query: string): Promise<Country[]> {
-    const url = `${this.url}/capital/${query}`;
-    return firstValueFrom(this.httpClient.get<Country[]>(url)).catch(() => []);
+  // ## operador rxjs para convertir un observable en una promesa
+  // searchByCapital(query: string): Promise<Country[]> {
+  //   const url = `${this.url}/capital/${query}`;
+  //   return firstValueFrom(this.httpClient.get<Country[]>(url)).catch(() => []);
+  // }
+
+  private searchCountry(url: string): Observable<Country[]> {
+    return this.httpClient.get<Country[]>(url).pipe(catchError(() => of([])));
   }
-  searchByCountry(query: string): Promise<Country[]> {
-    const url = `${this.url}/capital/${query}`;
-    return firstValueFrom(this.httpClient.get<Country[]>(url));
+
+  searchByCode(query: string): Observable<Country> {
+    const url = `${this.url}/alpha/${query}`;
+    return this.searchCountry(url).pipe(
+      map( countries => countries[0])
+    );
+    // return this.httpClient.get<Country[]>(url).pipe(catchError(() => of([])));
   }
-  searchByRegion(query: string): Promise<Country[]> {
+  searchByCapital(query: string): Observable<Country[]> {
     const url = `${this.url}/capital/${query}`;
-    return firstValueFrom(this.httpClient.get<Country[]>(url));
+    return this.searchCountry(url);
+    // return this.httpClient.get<Country[]>(url).pipe(catchError(() => of([])));
+  }
+  searchByCountry(query: string): Observable<Country[]> {
+    const url = `${this.url}/name/${query}`;
+    return this.searchCountry(url);
+  }
+
+  searchByRegion(query: string): Observable<Country[]> {
+    const url = `${this.url}/region/${query}`;
+    return this.searchCountry(url);
   }
 }

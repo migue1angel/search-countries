@@ -13,8 +13,9 @@
 
 <div class="row">
   <div class="col">
-    <ul>
-        <countries-country-table [countries]="countries"></countries-country-table>
-    </ul>
+    @if (isLoading) {
+      <shared-loading></shared-loading>
+    }
+    <countries-country-table [countries]="countries"></countries-country-table>
   </div>
 </div>
