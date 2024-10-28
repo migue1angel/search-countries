@@ -14,7 +14,6 @@ export class CountryPageComponent implements OnInit {
   private router = inject(Router);
   
   protected country?: Country;
-  protected languages!:string[]
 
   constructor() {}
 
@@ -24,13 +23,8 @@ export class CountryPageComponent implements OnInit {
       .subscribe((country) => {
         if (!country) return this.router.navigate(['/']);
         (this.country = country);
-        this.getLanguages()
         return 
       });
-  }
-
-  getLanguages(){
-    this.languages = Object.keys(this.country!.languages)
   }
   // ngOnInit(): void {
   //   this.activatedRoute.params.subscribe(({ id }) => {

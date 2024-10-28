@@ -39,6 +39,7 @@
 </div>
 <hr />
 <h3>Idiomas:</h3>
-@for (item of languages; track $index) {
-<button class="btn btn-success mx-auto btn-lg">{{ item | titlecase }}</button>
-} }
+  @for (item of country.languages | keyvalue; track $index) {
+  <button class="btn btn-success mx-2 btn-lg">{{ item.value }}</button>
+  }
+}
