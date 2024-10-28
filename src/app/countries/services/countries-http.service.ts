@@ -8,6 +8,10 @@ import { Country } from '../interfaces/country.interface';
 })
 export class CountriesHttpService {
   private url: string = 'https://restcountries.com/v3.1';
+  public cacheData = {
+    byCapital: { }
+  }
+
   constructor(private httpClient: HttpClient) {}
 
   // ## operador rxjs para convertir un observable en una promesa
