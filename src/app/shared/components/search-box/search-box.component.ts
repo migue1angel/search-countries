@@ -20,6 +20,8 @@ export class SearchBoxComponent implements OnInit {
 
   @Input()
   public placeHolder: string = '';
+  @Input()
+  public initialValue: string = '';
 
   // @Output()
   // protected inputValue = new EventEmitter<string>();

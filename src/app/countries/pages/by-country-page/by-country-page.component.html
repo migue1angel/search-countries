@@ -4,8 +4,9 @@
 <div class="row">
   <div class="col">
     <shared-search-box
+      [initialValue]="initialValue"
       placeHolder="Buscar por capital"
-      (inputValue)="searchByCountry($event)"
+      (debounceValue)="searchByCountry($event)"
     ></shared-search-box>
   </div>
 </div>
@@ -14,8 +15,8 @@
 <div class="row">
   <div class="col">
     @if (isLoading) {
-        <shared-loading></shared-loading>
-      }
+    <shared-loading></shared-loading>
+    }
     <countries-country-table [countries]="countries"></countries-country-table>
   </div>
 </div>

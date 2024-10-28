@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CountriesHttpService } from '../../services/countries-http.service';
 import { Country } from '../../interfaces/country.interface';
 
@@ -6,13 +6,19 @@ import { Country } from '../../interfaces/country.interface';
   selector: 'app-by-capital-page',
   templateUrl: './by-capital-page.component.html',
 })
-export class ByCapitalPageComponent {
+export class ByCapitalPageComponent implements OnInit {
   private countriesHttpService = inject(CountriesHttpService);
-
+  protected initialValue: string = '';
   protected countries: Country[] = [];
   protected isLoading: boolean = false;
 
   constructor() {}
+  ngOnInit(): void {
+    this.countries =
+      this.countriesHttpService.cachedCountriesData.byCapital.countries;
+    this.initialValue =
+      this.countriesHttpService.cachedCountriesData.byCapital.term;
+  }
 
   searchByCapital(query: string) {
     this.isLoading = true;
