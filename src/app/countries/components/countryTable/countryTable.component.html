@@ -4,7 +4,7 @@
 <ng-container [ngTemplateOutlet]="table"></ng-container>
 }
 <ng-template #table>
-  <table class="table table-hover">
+  <table class="table table-hover  table-responsive">
     <thead>
       <tr>
         <th>#</th>
@@ -16,23 +16,35 @@
       </tr>
     </thead>
     <tbody>
-      @for (country of countries; track $index; let i = $index) {
+      @for (country of paginatedCountries; track $index; let i = $index) {
 
       <tr>
-        <td>{{ i + 1 }}</td>
+        <td>{{ (currentPage - 1) * limit + i + 1 }}</td>
         <td>
-          <img
-            [src]="country.flags.svg"
-            [alt]="country.name.common"
-            style="width: 30px"
-          />
+          <img [src]="country.flags.svg" [alt]="country.name.common" style="width: 30px" />
         </td>
         <td>{{ country.name.common }}</td>
         <td>{{ country.capital }}</td>
         <td>{{ country.population | number }}</td>
-        <td><a [routerLink]="['/', 'countries','country', country.cca3]">Ver más</a></td>
+        <td>
+          <a [routerLink]="['/', 'countries', 'country', country.cca3]">Ver más</a>
+        </td>
       </tr>
       }
     </tbody>
   </table>
+
+  @if(countries.length > limit){
+  <div class="col-12 pagination flex justify-content-center">
+    <button class="btn btn-primary" (click)="prev()">Siguiente</button>
+    @for (page of [].constructor(numberPages); track $index; let i = $index) {
+    @if(i+1 <= currentPage + 2 && i+1 >= currentPage-2 ){
+
+      <button class="btn mx-1" [class.btn-outline-success]="currentPage === i + 1" (click)="pagination(i + 1)">
+        {{ i + 1 }}
+      </button>
+      } }
+      <button class="btn btn-primary" (click)="next()">Siguiente</button>
+  </div>
+  }
 </ng-template>
