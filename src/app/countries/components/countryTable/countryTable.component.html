@@ -1,10 +1,10 @@
 @if (countries.length === 0 ) {
 <div class="alert alert-warning text-center">No hay países que mostrar</div>
 }@else {
-<ng-container [ngTemplateOutlet]="table"></ng-container>
+<ng-container [ngTemplateOutlet]="table" class="col-12"></ng-container>
 }
 <ng-template #table>
-  <table class="table table-hover  table-responsive">
+  <table class="table table-hover table-responsive col-10">
     <thead>
       <tr>
         <th>#</th>
@@ -36,15 +36,15 @@
 
   @if(countries.length > limit){
   <div class="col-12 pagination flex justify-content-center">
-    <button class="btn btn-primary" (click)="prev()">Siguiente</button>
+    <button class="btn btn-primary btn-sm" (click)="prev()">Siguiente</button>
     @for (page of [].constructor(numberPages); track $index; let i = $index) {
     @if(i+1 <= currentPage + 2 && i+1 >= currentPage-2 ){
 
-      <button class="btn mx-1" [class.btn-outline-success]="currentPage === i + 1" (click)="pagination(i + 1)">
+      <button class="btn mx-1 btn-sm" [class.btn-outline-success]="currentPage === i + 1" (click)="pagination(i + 1)">
         {{ i + 1 }}
       </button>
       } }
-      <button class="btn btn-primary" (click)="next()">Siguiente</button>
+      <button class="btn btn-primary btn-sm" (click)="next()">Siguiente</button>
   </div>
   }
 </ng-template>

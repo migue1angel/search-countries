@@ -1,9 +1,9 @@
 <h2>Países</h2>
 <hr />
-<ul class="list-group">
+<div class="list-group d-flex flex-sm-row flex-md-column">
   @for (item of sidebarItems; track $index) {
 
-  <li
+  <div
     [routerLink]="item.path"
     routerLinkActive="active"
     [routerLinkActiveOptions]="{ exact: true }"
@@ -11,6 +11,6 @@
     style="cursor: pointer;"
   >
     {{ item.label }}
-  </li>
+  </div>
   }
-</ul>
+</div>
